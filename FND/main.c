@@ -1,22 +1,41 @@
+/*
+ * GccApplication1.c
+ *
+ * Created: 2020-05-27 오전 10:55:52
+ * Author : user
+ */ 
+
+#define  F_CPU  16000000UL
 #include <avr/io.h>
+#include <util/delay.h>
 
-int main(void) 
+
+unsigned char table[] =
 {
-	unsigned char table[] = 
-	{
-		   0b11111100, // FND FONT0
-		   0b01100000, // FND FONT1
-		   0b11011010, // FND FONT2
-		   0b11110010, // FND FONT3
-		   0b01100110, // FND FONT4
-		   0b10110110, // FND FONT5
-		   0b10111110, // FND FONT6
-		   0b11100000, // FND FONT7
-		   0b11111110, // FND FONT8
-		   0b11110110  // FND FONT9
-	};
+	0b11000000,
+	0b11111001,
+	0b10100100,
+	0b10110000,
+	0b10011001,
+	0b10010010,
+	0b10000011,
+	0b11111000,
+	0b10000000,
+	0b10011000
+};
 
-	DDRA = 0xFF;
-	PORTA = table[1];	
-	return 1;
+int main(void)
+{
+	DDRE = 0xFF;
+	PORTE = table[1];
+	
+	while (1)
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			PORTE = table[i];
+			_delay_ms(400);
+		}	
+	}
+	return 0;
 }
