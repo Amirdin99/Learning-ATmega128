@@ -2,8 +2,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-int count;
-
 int main(void)
 {
 	DDRA = 0xFF;
