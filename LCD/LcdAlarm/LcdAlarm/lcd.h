@@ -91,6 +91,11 @@ void LCD_Cursor(char col, char row)
 	LCD_wBCommand(0x80 | (row + col * 0x40));
 }
 
+void LCD_Cur(char data)
+{
+	
+}
+
 // 텍스트 LCD를 초기화하는 함수
 void LCD_Init(void)
 {

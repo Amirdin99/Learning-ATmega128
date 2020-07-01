@@ -138,10 +138,16 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="lcd.h">
+    <None Include="second.c">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="third.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="main.c">
+    <None Include="first.c">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="lcd.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
