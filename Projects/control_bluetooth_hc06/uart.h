@@ -17,7 +17,7 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-void uart_init(unsigned int baud)
+void uart0_init(unsigned int baud)
 {
 	UBRR0H = (unsigned char)(baud >> 8);
 	UBRR0L = (unsigned char)baud;
@@ -25,12 +25,37 @@ void uart_init(unsigned int baud)
 	sei();
 } // 8bit, no parity, 1 stop bit, TX enable, RX ISR enable
 
-void uart_write(unsigned char data)
+void uart0_write(unsigned char data)
 {
 	while (!(UCSR0A & (1 << UDRE0)));
 	// wait for sending
 	UDR0 = data; // send
 }
 
+void uart0_string(char* str)
+{
+	while (*str)
+		uart0_write(*str++);
+}
+
+void uart1_init(unsigned int baud)
+{
+	UBRR1H = (unsigned char)(baud >> 8);
+	UBRR1L = (unsigned char)baud;
+	UCSR1B = (1 << TXEN1) | (1 << RXEN1) | (1<<RXCIE1);
+} // 8bit, no parity, 1 stop bit, TX enable, RX ISR enable
+
+void uart1_write(unsigned char data)
+{
+	while (!(UCSR1A & (1 << UDRE1)));
+	// wait for sending
+	UDR1 = data; // send
+}
+
+void uart1_string(char* str)
+{
+	while (*str)
+		uart1_write(*str++);
+}
 
 #endif /* UART_H_ */
